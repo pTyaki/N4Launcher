@@ -8,7 +8,6 @@ Drag the shortcut in the folder to desktop
 Double click shortcut to launch
 
 Improvements:
-Includes a shortcut preset to run as administrator
 Recognizes AX Niagara versions
 Recognizes EC (Distech) Niagara versions
 Launcher closes on successful launch

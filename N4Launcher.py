@@ -2,11 +2,11 @@ import subprocess
 import os
 import json 
 import customtkinter
+from PIL import Image
 
 #Load from config
 with open ('config.json', 'r') as f:
     config = json.load(f)
-
 
 #n4FolderPath = 'C:\\Niagara'
 n4FolderPath = config['niagaraDirectory']
@@ -35,8 +35,8 @@ customtkinter.set_appearance_mode("light")
 customtkinter.set_default_color_theme("blue")
 
 root = customtkinter.CTk()
-root.geometry("500x350")
-root.title("N4 Launcher (Beta v0.5)")
+root.geometry("500x350+640+250")
+root.title("N4 Launcher (Beta v0.5.2)")
 
 #Function of the GUI
 def launch():
@@ -70,10 +70,11 @@ def launch():
     #Error window
     if result.returncode != 0:
         error_window = customtkinter.CTkToplevel()
-        error_window.geometry()
+        error_window.geometry("550+200")
         error_window.title('Warning: Daemon failed')
-        error_label = customtkinter.CTkLabel(error_window, text=result.stdout.decode('utf-8'))
-        error_label.pack(padx=20, pady=20)
+        error_label = customtkinter.CTkLabel(error_window, text=f"Please check for \"Run as Administrator\"\n\n{result.stdout.decode('utf-8')}")
+        error_label.pack(padx=30, pady=30)
+        error_window.attributes("-topmost", True)
     else:
         root.quit()
 
@@ -81,8 +82,12 @@ def launch():
 frame = customtkinter.CTkFrame(master = root)
 frame.pack(pady=20, padx=20, fill="both", expand=True)
 
-label = customtkinter.CTkLabel(master=frame, text="niagara", font=("Calibri", 80))
-label.pack(pady=15, padx=30)
+logo = customtkinter.CTkImage(dark_image=Image.open("n4Logo.png"), size=(350,111))
+logoButton = customtkinter.CTkLabel(master=frame, image=logo, text="")
+logoButton.pack(pady=30, padx=30)
+
+# label = customtkinter.CTkLabel(master=frame, text="niagara", font=("Calibri", 80))
+# label.pack(pady=15, padx=30)
 
 button = customtkinter.CTkButton(master=frame, text="LAUNCH", command=launch, font=("Arial Rounded MT Bold", 18), height=40, width=200)
 button.pack(pady=10, padx=10)

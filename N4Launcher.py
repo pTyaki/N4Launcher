@@ -36,7 +36,7 @@ customtkinter.set_default_color_theme("blue")
 
 root = customtkinter.CTk()
 root.geometry("500x350+640+250")
-root.title("N4 Launcher (Beta v0.5.2)")
+root.title("N4 Launcher v1.0")
 
 #Function of the GUI
 def launch():
